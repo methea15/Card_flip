@@ -1,0 +1,127 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+:root{
+    --card-front-bg: #a8d6c9;
+    --card-back-bg: #9cc9bc;
+    --card-shadow: rgba(0, 0, 0, 0.15);
+}
+
+body{
+    font-size: 1rem;
+    font-family: 'Lucida Sans', Verdana, sans-serif;   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#container{
+    perspective: 1000px;  
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.card{
+    margin: 1rem;
+    padding: 0.5rem;
+    text-align: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+.card_inner {
+    width: 300px;
+    height: 380px;
+    transform-style: preserve-3d;
+    transition: transform 0.6s ease, box-shadow 0.3s ease-in-out;
+    position: relative;   
+    border-radius: 2rem;
+}
+
+.card_inner:hover{
+    transform: scale(1.05); 
+    box-shadow: 0 10px 20px var(--card-shadow);
+}
+
+.front, .back {
+    display: flex;
+    flex-direction: column;
+    backface-visibility: hidden;
+    justify-content: center;
+    align-items: center;    
+    position: absolute;
+    padding: 1rem;
+    width: 100%;
+    height: 100%;
+    border-radius: 2rem;
+}
+
+.front {
+    transform: rotateY(0deg);
+    background-color: var(--card-front-bg);
+
+    p{
+        line-height: 1.5;
+    }
+}
+
+.pic_wrapper{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .pic{
+        max-width:  260px;
+        border-radius: 1rem;
+        max-height: 260px;
+        object-fit: contain;   
+        display: block;
+    }
+}
+
+.back {
+    transform: rotateY(180deg);
+    background-color: var(--card-back-bg);
+    color: #131212;
+    text-align: unset;
+    padding: 1.5rem;
+
+    p{
+        padding: 0 0.5rem;
+        overflow-y: auto;
+        scrollbar-width: thin;
+        scroll-behavior: smooth;
+        max-height: 180px;
+    }
+}
+
+input[type="checkbox"]:checked ~ .card_inner{
+    transform: rotateY(180deg);
+}
+
+.toggle{
+    cursor: pointer;
+    padding: 0.4rem 0.8rem;
+    background-color: #12787b;
+    color: rgb(241, 238, 238);
+    border-radius: 7px;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+
+    &:hover{
+        background-color: #549c68;
+    }
+}
+
+@media screen and (max-width: 400px) {
+
+    .card{
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+}
